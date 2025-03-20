@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Oswald:wght@200..700&family=Playwrite+DE+Grund:wght@100..400&family=Tektur:wght@400..900&display=swap');
+        
+        .blink-cursor {
+            display: inline;
+            content: "|";
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        
+        .content-box {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .content-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
+        }
+    </style>
+</head>
+<body class="bg-black text-green-400 font-['Chakra_Petch'] text-lg transition-colors duration-300" id="theme">
+    <div class="container mx-auto p-6 relative">
+        <!-- Dark/Light Mode Toggle -->
+        <button id="toggleTheme" class="absolute top-2 right-2">
+            <img id="themeIcon" src="https://img.icons8.com/ios-filled/50/ffffff/sun.png" class="w-8 h-8" alt="Toggle Theme">
+        </button>
+        
+        <!-- Terminal Header -->
+        <div id="terminalHeader" class="border border-green-400 p-6 rounded-lg mt-10 text-center text-2xl">
+            <p class="text-3xl">Welcome to my portfolio</p>
+            <p class="text-xl text-green-300" id="typewriter"></p><span class="blink-cursor">|</span>
+        </div>
+        
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 text-center">
+            <!-- About Me Section -->
+            <div class="content-box border border-green-400 p-6 rounded-lg text-xl">
+                <p class="text-2xl font-bold">About Me</p>
+                <p class="text-lg text-green-300">I am a passionate developer with experience in web development, cybersecurity, and algorithms.</p>
+            </div>
+            
+            <!-- Navigation to Projects Page -->
+            <div class="content-box border border-green-400 p-6 rounded-lg flex flex-col items-center justify-center text-xl">
+                <p class="text-2xl font-bold">Projects</p>
+                <p class="text-lg text-green-300">View my projects on a dedicated page:</p>
+                <a href="projects.html" class="mt-4 px-6 py-2 bg-green-500 text-black font-bold rounded hover:bg-green-600 transition">View Projects</a>
+            </div>
+            
+            <!-- Skills Section -->
+            <div class="content-box border border-green-400 p-6 rounded-lg text-xl">
+                <p class="text-2xl font-bold">Skills</p>
+                <ul class="text-lg text-green-300 space-y-1">
+                    <li>- JavaScript, Python, C++</li>
+                    <li>- Cybersecurity & CTF</li>
+                    <li>- DevOps & Cloud Computing</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Social Media Links -->
+        <div class="flex justify-center space-x-6 mt-8">
+            <a href="https://github.com/SunayKulkarni" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" class="w-10 h-10"></a>
+            <a href="https://linkedin.com" target="_blank"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" class="w-10 h-10"></a>
+            <a href="mailto:sunaykulkarni17@gmail.com"><img src="https://img.icons8.com/?size=100&id=P7UIlhbpWzZm&format=png&color=000000" alt="Gmail" class="w-10 h-10"></a>
+            <a href="https://www.linkedin.com/in/sunay-kulkarni-a252232a4/" target="_blank"><img src="https://img.icons8.com/?size=100&id=cMRBi0rI3iwb&format=png&color=000000" alt="Twitter" class="w-10 h-10"></a>
+        </div>
+    </div>
+    
+    <script>
+        const button = document.getElementById('toggleTheme');
+        const body = document.getElementById('theme');
+        const terminalHeader = document.getElementById('terminalHeader');
+        const contentBoxes = document.querySelectorAll('.content-box');
+        const themeIcon = document.getElementById('themeIcon');
+        let darkMode = true;
+
+        button.addEventListener('click', () => {
+            darkMode = !darkMode;
+            if (darkMode) {
+                body.classList.remove('bg-white', 'text-black');
+                body.classList.add('bg-black', 'text-green-400');
+                terminalHeader.classList.remove('bg-gray-900', 'text-white');
+                terminalHeader.classList.add('border-green-400');
+                themeIcon.src = "https://img.icons8.com/ios-filled/50/ffffff/sun.png";
+                contentBoxes.forEach(box => {
+                    box.classList.remove('bg-gray-900', 'text-white');
+                    box.classList.add('border-green-400');
+                });
+            } else {
+                body.classList.remove('bg-black', 'text-green-400');
+                body.classList.add('bg-white', 'text-black');
+                terminalHeader.classList.add('bg-gray-900', 'text-white');
+                themeIcon.src = "https://img.icons8.com/ios-filled/50/000000/moon.png";
+                contentBoxes.forEach(box => {
+                    box.classList.add('bg-gray-900', 'text-white');
+                });
+            }
+        });
+        
+        // Typewriter Effect
+        const text = "User: SunayKulkarni:~$";
+        let index = 0;
+        function typeWriter() {
+            if (index < text.length) {
+                document.getElementById("typewriter").innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+        window.onload = typeWriter;
+    </script>
+</body>
+</html>
